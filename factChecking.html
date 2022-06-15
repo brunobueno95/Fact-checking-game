@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        //modell
+        let countryList = ['Norway','Brasil','France','Italy','Japan'];
+        let capitalList = ['Oslo','Rio','Paris','Rome','Tokyo'];
+        let languageList = ['Norwegian','Portuguese','French','Italian','Japanese'];
+        let populationList = ['5.379 million', '212.6 million', '67.39 million','59.55 million','125.8 million'];
+        let country = '______';
+        let capital= '______';
+        let language= '______';
+        let population= '______';
+        let result = '';
+        let points = 0;
+
+        //view
+        updateView()
+        function updateView(){
+            let html = " ";
+            html += `<h1> Fact checking game</h1>
+                    <div>click on the respective buttons to change the text to match the facts to a correct answer</div><br>
+
+                <div>${country} is a country that has ${capital} as the capital, the native language is ${language}
+                 and it has a population of ${population} habitants</div><br>
+                 <button onclick ="giveCountry()">Country</button> <button onclick ="giveCapital()">Capital</button>
+                 <button onclick ="giveLanguage()">Language</button> <button onclick ="givePopulation()">Population</button>
+                 <br><br>
+                 <button onclick="checkFacts()">Send Answer</button><br><br>
+                 <div>${result}</div>
+                 <div>Your Points : ${points}</div>`
+        
+        
+        
+        document.getElementById('app').innerHTML = html;
+        }
+
+        //controller
+
+        function giveCountry(){
+            let newNameList = countryList.filter( i => i != country);
+            let random = Math.floor(Math.random() *  newNameList.length);
+            country = newNameList[random];
+            updateView()
+
+        }
+        
+        function giveCapital(){
+            let newNameList = capitalList.filter( i => i != capital);
+            let random = Math.floor(Math.random() *  newNameList.length);
+            capital = newNameList[random];
+            updateView()
+
+        }
+        
+        function giveLanguage(){
+            let newNameList = languageList.filter( i => i != language);
+            let random = Math.floor(Math.random() *  newNameList.length);
+            language = newNameList[random];
+            updateView()
+
+        }
+        
+        function givePopulation(){
+            let newNameList = populationList.filter( i => i !=population);
+            let random = Math.floor(Math.random() *  newNameList.length);
+            population = newNameList[random];
+            updateView()
+
+        }
+
+        function checkFacts(){
+            if(country == 'Norway' && capital =='Oslo' && language =='Norwegian' && population =='5.379 million' || 
+               country == 'Brasil' && capital =='Brasilia' && language =='Portuguese' && population =='212.6 million' ||
+               country == 'France' && capital =='Paris' && language =='French' && population =='67.39 million' ||
+               country == 'Italy' && capital =='Rome' && language =='Italian' && population =='59.55 million' ||
+               country == 'Japan' && capital =='Tokyo' && language =='Japanese' && population =='125.8 million' ){
+                   result = 'Congratulations, all the facts match to a correct answer!'
+                   points++
+               }
+            else {
+                result= 'Sorry, the facts dont match it correctly, try it again.'
+                points--
+            }   
+            updateView()
+
+        }
+    </script>
+    
+</body>
+</html>
